@@ -1,10 +1,12 @@
+const scriptURL = 'https://script.google.com/macros/s/AKfycbwmCehd1MIY-I9dqQgLm9xtzi4pWqIRySgktkF1Rrk4oSy2iHgbdTE_4oufWW1KWoER/exec'
+
 document.addEventListener('DOMContentLoaded', function () {
     const currencyFields = ['jumlah_dibayarkan', 'tagihan_ukt', 'ongkir', 'biaya_admin_bank'];
 
-    currencyFields.forEach(function(fieldId) {
+    currencyFields.forEach(function (fieldId) {
         const field = document.getElementById(fieldId);
 
-        field.addEventListener('input', function() {
+        field.addEventListener('input', function () {
             let value = field.value.replace(/[^,\d]/g, '').toString();
             let split = value.split(',');
             let remainder = split[0].length % 3;
@@ -20,25 +22,23 @@ document.addEventListener('DOMContentLoaded', function () {
             field.value = 'Rp ' + rupiah;
         });
 
-        field.addEventListener('blur', function() {
+        field.addEventListener('blur', function () {
             // Convert the formatted string back to a number for saving
             field.value = field.value.replace(/[^0-9]/g, '');
         });
     });
 
-    document.getElementById('studentForm').addEventListener('submit', function(e) {
+    document.getElementById('studentForm').addEventListener('submit', function (e) {
         e.preventDefault();
 
         const formData = new FormData(this);
 
         // Before sending, remove the formatting (Rp and dots)
-        currencyFields.forEach(function(fieldId) {
+        currencyFields.forEach(function (fieldId) {
             const field = document.getElementById(fieldId);
             formData.set(fieldId, field.value.replace(/[^0-9]/g, ''));
         });
 
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxPlFXAUb_AP8IhZJR76FYsgLkKzCKQgBLix1o6YUMa7iTidCPj7zQAh1wZmsaUVQ/exec';
-        
         fetch(scriptURL, { method: 'POST', body: formData })
             .then(response => {
                 alert('Data telah berhasil dikirim!');
@@ -55,7 +55,7 @@ function validatePage1() {
     const requiredFields = ['tanggal', 'nama', 'jurusan', 'status', 'jalur', 'jumlah_dibayarkan', 'status_pembayaran_ukt', 'tagihan_ukt'];
     for (let i = 0; i < requiredFields.length; i++) {
         const field = document.getElementById(requiredFields[i]);
-        
+
         if (!field.value) {
             alert('Please fill out all required fields.');
             return false;
@@ -67,17 +67,17 @@ function validatePage1() {
 // Validation for Page 2
 function validatePage2() {
     const requiredFields = ['status_pembayaran_almamater', 'status_pembayaran_kaos', 'status_pembayaran_admisi'];
-    
+
     for (let i = 0; i < requiredFields.length; i++) {
         const field = document.getElementById(requiredFields[i]);
-        
+
         // Check if the field is empty or has not been selected
         if (!field.value || field.value === "") {
             alert('Please fill out all required fields.');
             return false; // Prevents moving to the next page
         }
     }
-    
+
     // If all fields are filled, proceed to the next page
     nextPage(3); // Assuming nextPage() takes the next page number as an argument
 }
@@ -113,19 +113,19 @@ function validatePage3() {
         'status_pendapatan_sk',
         'status_pendapatan_almamater',
         'status_pendapatan_kaos',
-        'status_pendapatan_operasional'
+        'status_pendapatan_operasional' 
     ];
 
     for (let i = 0; i < requiredFields.length; i++) {
         const field = document.getElementById(requiredFields[i]);
-        
+
         // Check if the field is empty or has not been selected
         if (!field.value || field.value === "") {
             alert('Please fill out all required fields.');
             return false; // Prevents form submission
         }
     }
-    
+
     // If all fields are filled, show confirmation dialog
     confirmSubmit();
     return true; // Allows form submission to proceed
@@ -163,8 +163,6 @@ function sendData() {
         const field = document.getElementById(fieldId);
         formData.set(fieldId, field.value.replace(/[^0-9]/g, ''));
     });
-
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxPlFXAUb_AP8IhZJR76FYsgLkKzCKQgBLix1o6YUMa7iTidCPj7zQAh1wZmsaUVQ/exec';
 
     fetch(scriptURL, { method: 'POST', body: formData })
         .then(response => {
