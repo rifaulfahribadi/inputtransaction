@@ -1,0 +1,131 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+form {
+    max-width: 400px;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    font-weight: normal;
+    margin-bottom: 8px;
+    text-align: left;
+    margin-left: 5%;
+    width: 90%;
+}
+
+input, select {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin-left: 5%;
+}
+
+input::placeholder, select {
+    color: #999;
+}
+
+/* Button styling for Page 1 */
+.button-next-right {
+    width: auto; /* Width is auto for web */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    box-sizing: border-box;
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button-next-right:hover {
+    background-color: #0056b3;
+}
+
+/* Container for Back and Next/Kirim buttons on Page 2 and 3 */
+.button-container-right {
+    display: flex;
+    justify-content: center; /* Center the buttons */
+    margin-top: 20px;
+    gap: 10px;
+    width: 90%; /* Align container with input fields */
+    margin-left: auto; /* Center the container */
+    margin-right: auto; /* Center the container */
+    box-sizing: border-box;
+}
+
+.secondary-button, .button-next-right {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    max-width: calc(50% - 5px); /* Ensure both buttons together don't exceed field width */
+}
+
+.secondary-button {
+    background-color: transparent;
+    border: 2px solid #007BFF;
+    color: #007BFF;
+    cursor: pointer;
+}
+
+.secondary-button:hover {
+    background-color: #e7f1ff;
+}
+
+.button-next-right {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+.button-next-right:hover {
+    background-color: #0056b3;
+}
+
+/* Mobile Styling */
+@media (max-width: 768px) {
+    /* Page 1 Button */
+    .button-next-right {
+        width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    /* Page 2 and 3 Buttons */
+    .button-container-right {
+        flex-direction: column;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .secondary-button, .button-next-right {
+        width: 100%;
+        max-width: 100%; /* Ensure buttons take full width of container */
+        margin-bottom: 10px;
+    }
+
+    .button-container-right button:last-child {
+        margin-bottom: 0;
+    }
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Transaksi Mahasiswa Baru</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <form id="studentForm">
+        <!-- Page 1 -->
+        <div class="form-page" id="page1">
+            <label for="tanggal">Tanggal:</label>
+            <input type="date" id="tanggal" name="tanggal" required>
+
+            
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" name="nama" placeholder="Masukan Nama Lengkap" required>
+            
+            <label for="jurusan">Jurusan:</label>
+            <select id="jurusan" name="jurusan" required>
+                <option value="">Pilih Jurusan</option>
+                <option value="Pendidikan-Pendas">Pendidikan-Pendas</option>
+                <option value="Pendidikan-Non-Pendas">Pendidikan-Non-Pendas</option>
+                <option value="Non-Pendidikan">Non-Pendidikan</option>
+                <option value="Non-Pendidikan Khusus">Non-Pendidikan Khusus</option>
+            </select>
+
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+                <option value="">Pilih Status</option>
+                <option value="In-Service">In-Service</option>
+                <option value="Pre-Service">Pre-Service</option>
+                <option value="None">None</option>
+            </select>
+
+            <label for="jalur">Jalur:</label>
+            <select id="jalur" name="jalur" required>
+                <option value="">Pilih Jalur Program</option>
+                <option value="RPL">RPL</option>
+                <option value="Non-RPL">Non-RPL</option>
+            </select>
+
+            <label for="jumlah_dibayarkan">Jumlah Dibayarkan:</label>
+            <input type="text" id="jumlah_dibayarkan" name="jumlah_dibayarkan" placeholder="Input Nominal Yang Sudah Dibayarkan" required>
+            
+            <label for="status_pembayaran_ukt">Status Pembayaran UKT:</label>
+            <select id="status_pembayaran_ukt" name="status_pembayaran_ukt" required>
+                <option value="">Pilih Status Pembayaran</option>
+                <option value="Dibayarkan">Dibayarkan</option>
+                <option value="Belum Dibayar">Belum Dibayar</option>
+            </select>
+
+            <label for="tagihan_ukt">Tagihan UKT:</label>
+            <input type="text" id="tagihan_ukt" name="tagihan_ukt" placeholder="Input Nominal Untuk Tagihan UKT" required>
+            
+            <label for="ongkir">Ongkir:</label>
+            <input type="text" id="ongkir" name="ongkir" placeholder="Input Nominal Ongkir (Opsional)">
+            
+            <label for="biaya_admin_bank">Biaya Administrasi Bank:</label>
+            <input type="text" id="biaya_admin_bank" name="biaya_admin_bank" placeholder="Input Nominal Administrasi Bank (Opsional)">
+
+            <button type="button" class="button-next-right" onclick="validatePage1()">Next</button>
+        </div>
+
+        <!-- Page 2 -->
+        <div class="form-page" id="page2" style="display:none;">
+            <label for="status_pembayaran_almamater">Status Pembayaran Almamater:</label>
+            <select id="status_pembayaran_almamater" name="status_pembayaran_almamater" required>
+                <option value="">Pilih Status Pembayaran</option>
+                <option value="Dibayarkan">Dibayarkan</option>
+                <option value="Belum Dibayar">Belum Dibayar</option>
+            </select>
+
+            <label for="status_pembayaran_kaos">Status Pembayaran Kaos:</label>
+            <select id="status_pembayaran_kaos" name="status_pembayaran_kaos" required>
+                <option value="">Pilih Status Pembayaran</option>
+                <option value="Dibayarkan">Dibayarkan</option>
+                <option value="Belum Dibayar">Belum Dibayar</option>
+            </select>
+
+            <label for="status_pembayaran_admisi">Status Pembayaran Admisi:</label>
+            <select id="status_pembayaran_admisi" name="status_pembayaran_admisi" required>
+                <option value="">Pilih Status Pembayaran</option>
+                <option value="Dibayarkan">Dibayarkan</option>
+                <option value="Belum Dibayar">Belum Dibayar</option>
+            </select>
+
+            <div class="button-container-right">
+                <button type="button" class="secondary-button" onclick="previousPage(1)">Back</button>
+                <button type="button" class="button-next-right" onclick="validatePage2()">Next</button>
+              </div>           
+        </div>
+
+        <!-- Page 3 -->
+        <div class="form-page" id="page3" style="display:none;">
+            <label for="status_pendapatan_admisi">Status Pendapatan Admisi:</label>
+            <select id="status_pendapatan_admisi" name="status_pendapatan_admisi" required>
+                <option value="">Pilih Status Pendapatan</option>
+                <option value="Dibayarkan">Dibayarkan</option>
+                <option value="Belum Dibayar">Belum Dibayar</option>
+            </select>
+
+            <label for="status_pendapatan_admin_berkas">Status Pendapatan Administrasi Berkas:</label>
+            <select id="status_pendapatan_administrasi_berkas" name="status_pendapatan_administrasi_berkas" required>
+                <option value="">Pilih Status Pendapatan</option>
+                <option value="Dibayarkan">Dibayarkan</option>
+                <option value="Belum Dibayar">Belum Dibayar</option>
+            </select>
+
+            <label for="status_pendapatan_sk">Status Pendapatan SK:</label>
+            <select id="status_pendapatan_sk" name="status_pendapatan_sk" required>
+                <option value="">Pilih Status Pendapatan</option>
+                <option value="Dibayarkan">Dibayarkan</option>
+                <option value="Belum Dibayar">Belum Dibayar</option>
+            </select>
+
+            <label for="status_pendapatan_almamater">Status Pendapatan Almamater:</label>
+            <select id="status_pendapatan_almamater" name="status_pendapatan_almamater" required>
+                <option value="">Pilih Status Pendapatan</option>
+                <option value="Dibayarkan">Dibayarkan</option>
+                <option value="Belum Dibayar">Belum Dibayar</option>
+            </select>
+
+            <label for="status_pendapatan_kaos">Status Pendapatan Kaos:</label>
+            <select id="status_pendapatan_kaos" name="status_pendapatan_kaos" required>
+                <option value="">Pilih Status Pendapatan</option>
+                <option value="Dibayarkan">Dibayarkan</option>
+                <option value="Belum Dibayar">Belum Dibayar</option>
+            </select>
+
+            <label for="status_pendapatan_operasional">Status Pendapatan Operasional:</label>
+            <select id="status_pendapatan_operasional" name="status_pendapatan_operasional" required>
+                <option value="">Pilih Status Pendapatan</option>
+                <option value="Dibayarkan">Dibayarkan</option>
+                <option value="Belum Dibayar">Belum Dibayar</option>
+            </select>
+
+            <div class="button-container-right">
+                <button type="button" class="secondary-button" onclick="previousPage(2)">Back</button>
+                <button type="submit" class="button-next-right" onclick="return handleSubmit()">Kirim</button>
+            </div>                      
+        </div>
+        </div>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>
