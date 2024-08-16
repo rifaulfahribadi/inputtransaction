@@ -1,4 +1,4 @@
-const scriptURL = 'https://script.google.com/macros/s/AKfycbwmCehd1MIY-I9dqQgLm9xtzi4pWqIRySgktkF1Rrk4oSy2iHgbdTE_4oufWW1KWoER/exec'
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzzJ3-9SNHELozRr2OKKGW5MqloH46Glxso_mp9IdKNJAXeMBVx0tKYQfOUbtmHyIwx/exec'
 
 document.addEventListener('DOMContentLoaded', function () {
     const currencyFields = ['jumlah_dibayarkan', 'tagihan_ukt', 'ongkir', 'biaya_admin_bank'];
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Validation for Page 1
 function validatePage1() {
-    const requiredFields = ['tanggal', 'nama', 'jurusan', 'status', 'jalur', 'jumlah_dibayarkan', 'status_pembayaran_ukt', 'tagihan_ukt'];
+    const requiredFields = ['tanggal', 'nama', 'jurusan', 'status', 'jalur', 'status_pembayaran_tagihan', 'jumlah_dibayarkan', 'status_pembayaran_ukt', 'tagihan_ukt'];
     for (let i = 0; i < requiredFields.length; i++) {
         const field = document.getElementById(requiredFields[i]);
 
