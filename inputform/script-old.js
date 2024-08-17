@@ -1,7 +1,7 @@
 const scriptURL = 'https://script.google.com/macros/s/AKfycbwLybYIn5LjbE62lI4uCadJRVT_kKFoVfPqJd0b7iufAJjwIwjn9lzR5U6gSMTqxI6Z/exec'
 
 document.addEventListener('DOMContentLoaded', function () {
-    const currencyFields = ['jumlah_dibayarkan', 'tagihan_ukt', 'ongkir', 'biaya_admin_bank'];
+    const currencyFields = ['jumlah_dibayarkan', 'tagihan_ukt' ];
 
     currencyFields.forEach(function (fieldId) {
         const field = document.getElementById(fieldId);
@@ -34,7 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const formData = new FormData(this);
 
         // Add a hidden input for student type
-        formData.append('student_type', 'new');
+        formData.append('student_type', 'old');
+
 
         // Before sending, remove the formatting (Rp and dots)
         currencyFields.forEach(function (fieldId) {
@@ -55,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Validation for Page 1
 function validatePage1() {
-    const requiredFields = ['tanggal', 'nama', 'jurusan', 'status', 'jalur', 'status_pembayaran_tagihan', 'jumlah_dibayarkan', 'status_pembayaran_ukt', 'tagihan_ukt'];
+    const requiredFields = ['tanggal', 'nama', 'jurusan', 'status', 'jalur' ];
     for (let i = 0; i < requiredFields.length; i++) {
         const field = document.getElementById(requiredFields[i]);
 
@@ -67,24 +68,6 @@ function validatePage1() {
     nextPage(2); // Move to the next page only if validation is successful
 }
 
-// Validation for Page 2
-function validatePage2() {
-    const requiredFields = ['status_pembayaran_almamater', 'status_pembayaran_kaos', 'status_pembayaran_admisi'];
-
-    for (let i = 0; i < requiredFields.length; i++) {
-        const field = document.getElementById(requiredFields[i]);
-
-        // Check if the field is empty or has not been selected
-        if (!field.value || field.value === "") {
-            alert('Please fill out all required fields.');
-            return false; // Prevents moving to the next page
-        }
-    }
-
-    // If all fields are filled, proceed to the next page
-    nextPage(3); // Assuming nextPage() takes the next page number as an argument
-}
-
 // Navigate to the next page
 function nextPage(pageNumber) {
     var pages = document.getElementsByClassName('form-page');
@@ -94,30 +77,15 @@ function nextPage(pageNumber) {
     document.getElementById('page' + pageNumber).style.display = 'block';
 }
 
-// Navigate to the previous page
-function previousPage(pageNumber) {
-    var pages = document.getElementsByClassName('form-page');
-    for (var i = 0; i < pages.length; i++) {
-        pages[i].style.display = 'none';
-    }
-    document.getElementById('page' + pageNumber).style.display = 'block';
-}
 
 // Function to handle the submission button
 function handleSubmit() {
-    validatePage3();
+    validatePage2();
 }
 
-// Validation function for Page 3 before submitting the form
-function validatePage3() {
-    const requiredFields = [
-        'status_pendapatan_admisi',
-        'status_pendapatan_administrasi_berkas',
-        'status_pendapatan_sk',
-        'status_pendapatan_almamater',
-        'status_pendapatan_kaos',
-        'status_pendapatan_operasional' 
-    ];
+// Validation for Page 2
+function validatePage2() {
+    const requiredFields = ['status_pembayaran_tagihan', 'jumlah_dibayarkan', 'status_pembayaran_ukt', 'tagihan_ukt', 'status_pendapatan_operasional' ];
 
     for (let i = 0; i < requiredFields.length; i++) {
         const field = document.getElementById(requiredFields[i]);
@@ -125,7 +93,7 @@ function validatePage3() {
         // Check if the field is empty or has not been selected
         if (!field.value || field.value === "") {
             alert('Please fill out all required fields.');
-            return false; // Prevents form submission
+            return false; // Prevents moving to the next page
         }
     }
 
@@ -144,6 +112,17 @@ function confirmSubmit() {
     return false;
 }
 
+
+// Navigate to the previous page
+function previousPage(pageNumber) {
+    var pages = document.getElementsByClassName('form-page');
+    for (var i = 0; i < pages.length; i++) {
+        pages[i].style.display = 'none';
+    }
+    document.getElementById('page' + pageNumber).style.display = 'block';
+}
+
+
 function disableSubmitButton() {
     const submitButton = document.querySelector('button[type="submit"]');
     submitButton.disabled = true;
@@ -160,11 +139,12 @@ function sendData() {
     const form = document.getElementById('studentForm');
     const formData = new FormData(form);
 
+
     // Add a hidden input for student type
-    formData.append('student_type', 'new');
-    
+    formData.append('student_type', 'old');
+
     // Before sending, remove the formatting (Rp and dots) for currency fields
-    const currencyFields = ['jumlah_dibayarkan', 'tagihan_ukt', 'ongkir', 'biaya_admin_bank'];
+    const currencyFields = ['jumlah_dibayarkan', 'tagihan_ukt'];
     currencyFields.forEach(function (fieldId) {
         const field = document.getElementById(fieldId);
         formData.set(fieldId, field.value.replace(/[^0-9]/g, ''));
